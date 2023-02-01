@@ -4,11 +4,11 @@ import requests
 
 # Create your views here.
 def test1(request):
-    # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')    
-    # if x_forwarded_for:
-    #     ip = x_forwarded_for.split(',')[0]
-    # else:
-    #     ip = request.META.get('REMOTE_ADDR')
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')    
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
     
     # device_type = ""
     # browser_type = ""
@@ -26,7 +26,7 @@ def test1(request):
     # browser_version = request.user_agent.browser.version_string
     # os_type = request.user_agent.os.family
     # os_version = request.user_agent.os.version_string
-    ip = '117.203.246.41'
+    # ip = '117.203.246.41'
     ip_response = requests.get('http://ip-api.com/json/'+ip)  
     ip_response = ip_response.json()
     location_country = ip_response['country']

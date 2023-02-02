@@ -4,8 +4,8 @@ import requests
 import qrcode
 import cloudinary, cloudinary.uploader, cloudinary.api
 config=cloudinary.config(secure=True)
-
-
+from io import BytesIO
+byte_io = BytesIO()
 
 # Create your views here.
 def test1(request):
@@ -42,7 +42,7 @@ def test1(request):
     qr=qrcode.make('http://www.google.com')
     cloudinary.uploader.upload(qr, public_id="hehe_qr", unique_filename = False, overwrite=True, folder="TagIt")
     srcURL = cloudinary.CloudinaryImage("hehe_qr").build_url()
-    
+    qr.save(byte_io, 'PNG')
     context = {
         "ip": ip,
         # "device_type": device_type,
